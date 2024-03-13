@@ -1,6 +1,5 @@
-import type { IPagination } from "@/types/pagination";
 import type { IProduct } from "@/types/product"
-import { URLSearchParams } from "url";
+import type { IPagination } from "@/types/pagination";
 
 interface IResponsProducts {
     product: IProduct[],
@@ -9,10 +8,11 @@ interface IResponsProducts {
 
 export const getProducts = async (page: number = 1): Promise<IResponsProducts> => {
     try {
-        const query =new URLSearchParams({
+        const query = new URLSearchParams({
             page: String(page),
-            limit: String(8),
-        })
+            limit: String(8)
+        }).toString();
+        
         const fetchResponse = await fetch(`https://vue-study.skillbox.cc/api/products?${query}`);
         const respons = await fetchResponse.json();
         const product: IProduct[] = respons.items;
@@ -21,8 +21,7 @@ export const getProducts = async (page: number = 1): Promise<IResponsProducts> =
             product: product,
             pagination: respons.pagination,
         };
-    } catch(err) {
-        throw new Error('Product response was not ok')
+    } catch (error) {
+        throw new Error(`Failed to fetch products: ${error.message}`);
     }
-    
 }

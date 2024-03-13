@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { getProducts } from '@/api/product';
 import type { IProduct } from '@/types/product';
-import { ref } from 'vue';
+import type { IPagination } from '@/types/pagination';
 import Product from '../ProductView.vue';
 import AppPagination from '../AppPaginationView.vue';
-import type { IPagination } from '@/types/pagination';
 
 
 const products = ref<IProduct[]>([])
@@ -31,10 +31,15 @@ const pagination = ref<IPagination>({
 })
 
 const loadProducts = async (page: number) => {
-    const response = await getProducts(page)
-    products.value = response.product
-    pagination.value = response.pagination
-}
+  try {
+    const response = await getProducts(page);
+    products.value = response.product;
+    pagination.value = response.pagination;
+  } catch (error) {
+    console.error(`Error fetching products: ${error.message}`);
+  }
+};
+
 
 const changePage = async (page: number) => {
     if (page !== pagination.value.page) {

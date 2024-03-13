@@ -19,13 +19,13 @@ const props = defineProps<{product: IProduct}>()
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  width: 300px;
-  min-height: 340px;
-  border: 1px solid #000;
-  border-radius: 6px;
-  background-color: #c7c7c7;
-
+    width: 300px;
+    min-height: 340px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    background-color: #c7c7c7;
 }
+
 .product-with-small-price {
   border: 1px solid #027502;
 }
@@ -52,7 +52,7 @@ const props = defineProps<{product: IProduct}>()
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  padding: 4px;
+    padding: 4px;
 }
 h5 {
   margin: 16px 0;

@@ -18,7 +18,7 @@ const router = createRouter ({
                     path: 'catalog',
                     component: ( ) => import('../views/catalog/MainCatalogView.vue'),
                 },
-        ]
+            ]
         },
         {
             name: 'settings',

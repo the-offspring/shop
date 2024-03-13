@@ -1,6 +1,6 @@
 <template>
     <div :class="['product']">
-        <img :src="product.image.file.url" class="product-img-top" alt="product image">
+        <img :src="product.image.file.url" :class="['product-img-top']" alt="product image">
         <div class="product-body">
             <h5 class="product-title">{{ product.title }}</h5>
             <p :class="['product-text']">{{ product.price }}</p>
@@ -12,6 +12,7 @@
 import type { IProduct } from '@/types/product';
 
 const props = defineProps<{product: IProduct}>()
+
 </script>
 
 <style scoped>
@@ -28,6 +29,9 @@ const props = defineProps<{product: IProduct}>()
 
 .product-with-small-price {
   border: 1px solid #027502;
+}
+img {
+  width: max-content;
 }
 .product-img-top {
   width: 100%;

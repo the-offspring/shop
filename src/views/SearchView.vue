@@ -24,7 +24,6 @@ const updateSearchQuery = (event: Event) => {
 };
 
 const sendRequest = () => {
-    console.log('Search query:', searchQuery.value);
     if (searchQuery.value.trim() !== '') {
         emit('search-product', { searchText: searchQuery.value });
     }

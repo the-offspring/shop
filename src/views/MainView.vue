@@ -7,7 +7,7 @@
     <RouterLink to="sales" > Sale </RouterLink>
 
     <div class="container">
-        <div class="main__catalog">
+        <div class="main__view">
             <RouterView />
         </div>
     </div>
@@ -26,5 +26,6 @@
     display: flex;
     justify-content: center;
 }
+
 
 </style>

@@ -1,26 +1,39 @@
 <template>
     <h2> Catalog </h2>
-    <div class="catalog">
-   <Product 
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-   />
+    <div class="content">
+        <div class="left-layout">
+            <Filter :min-price="minPrice" :max-price="maxPrice" @price="handlePriceChange" />
+        </div>
+        <div class="right-layout">
+            <div class="header">
+                <Search @search-product="handleSearchinChange" />
+            </div>
+            <div class="body">
+                <div class="filter-products" v-if="minPrice !== null && maxPrice !== null">
+                    <Product v-for="product in filteredComputed" :key="product.id" :product="product" />
+                </div>
+                <div class="search-products" v-else>
+                    <Product v-for="product in products" :key="product.id" :product="product" />
+                </div>
+
+            </div>
+            <div class="footer">
+                <AppPagination :total-pages="pagination.pages" :current-page="pagination.page"
+                    @update:current-page="changePage" />
+            </div>
+        </div>
     </div>
-    <AppPagination 
-        :total-pages="pagination.pages"
-        :current-page="pagination.page"
-        @update:current-page="changePage"
-    />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { getProducts } from '@/api/product';
 import type { IProduct } from '@/types/product';
 import type { IPagination } from '@/types/pagination';
 import Product from '../ProductView.vue';
 import AppPagination from '../AppPaginationView.vue';
+import Filter from '../FilterView.vue'
+import Search from '../SearchView.vue'
 
 
 const products = ref<IProduct[]>([])
@@ -30,16 +43,53 @@ const pagination = ref<IPagination>({
     total: 0,
 })
 
-const loadProducts = async (page: number) => {
-  try {
-    const response = await getProducts(page);
-    products.value = response.product;
-    pagination.value = response.pagination;
-  } catch (error) {
-    console.error(`Error fetching products: ${error.message}`);
-  }
+const minPrice = ref<number | null>(null);
+const maxPrice = ref<number | null>(null);
+const searchText = ref('');
+
+const handleSearchinChange = ({ searchText: newSearchText }: { searchText: string | null }) => {
+    console.log('New search text:', newSearchText);
+    if (newSearchText !== null && undefined) {
+        searchText.value = newSearchText;
+        loadProducts(1, newSearchText);
+    }
 };
 
+
+watch(searchText, (newVal, oldVal) => {
+    loadProducts(1, newVal);
+});
+
+const handlePriceChange = ({ minPrice: newMinPrice, maxPrice: newMaxPrice }: { minPrice: number | null; maxPrice: number | null }) => {
+    if (newMinPrice !== null) {
+        minPrice.value = newMinPrice;
+    }
+    if (newMaxPrice !== null) {
+        maxPrice.value = newMaxPrice;
+    }
+};
+
+const filteredComputed = computed(() => {
+    return products.value.filter(product => {
+        if (minPrice.value && product.price < minPrice.value
+            || maxPrice.value && product.price > maxPrice.value) {
+            return false;
+        }
+        return true;
+    })
+});
+
+const loadProducts = async (page: number, searchText?: string) => {
+    try {
+        const response = await getProducts(page, searchText);
+        console.log('Received products:', response.product);
+        console.log('Received pagination:', response.pagination);
+        products.value = response.product;
+        pagination.value = response.pagination;
+    } catch (error) {
+        console.error(`Error fetching products: ${error.message}`);
+    }
+};
 
 const changePage = async (page: number) => {
     if (page !== pagination.value.page) {
@@ -47,28 +97,41 @@ const changePage = async (page: number) => {
     }
 }
 
-loadProducts(pagination.value.page)
+loadProducts(pagination.value.page);
 </script>
 
+
 <style scoped>
-.catalog {
+.content {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 15px;
+}
+
+.header {
+    width: 100%;
+}
+
+.right-layout {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 12px;
-}
-/* .list {
-    list-style-type: none;
-    padding: 0;
-}
-.item {
-    width: 80px;
-    height: 120px;
-    background-color: #d3d2d2;
-    border: 1px solid #000;
-    border-radius: 12px;
-    &:nth-child(6n + 2) {
-        width: 100%;
+
+    .body {
+        .filter-products,.search-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
     }
-} */
+
+    .footer {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.left-layout {}
 </style>

@@ -36,14 +36,19 @@
   
 <style scoped>
 .paginator {
-    display: grid;
+    display: flex;
     justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
     margin-top: 8vh;
     margin-bottom: 3vh;
 }
   .active {
     background-color: #007bff;
     color: #fff;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
   }
 </style>

@@ -6,16 +6,18 @@ interface IResponsProducts {
     pagination: IPagination,
 }
 
-export const getProducts = async (page: number = 1): Promise<IResponsProducts> => {
+export const getProducts = async (page: number = 1, searchText?: string): Promise<IResponsProducts> => {
     try {
         const query = new URLSearchParams({
             page: String(page),
-            limit: String(8)
+            limit: String(20)
         }).toString();
         
         const fetchResponse = await fetch(`https://vue-study.skillbox.cc/api/products?${query}`);
         const respons = await fetchResponse.json();
-        const product: IProduct[] = respons.items;
+        const product: IProduct[] = searchText 
+        ? respons.items.filter((el: IProduct) => el.title.includes(searchText)) 
+        : respons.items;
 
         return {
             product: product,

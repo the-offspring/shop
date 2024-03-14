@@ -47,13 +47,12 @@ const minPrice = ref<number | null>(null);
 const maxPrice = ref<number | null>(null);
 const searchText = ref('');
 
-const handleSearchinChange = ({ searchText: newSearchText }: { searchText: string | null }) => {
-    console.log('New search text:', newSearchText);
-    if (newSearchText !== null && undefined) {
-        searchText.value = newSearchText;
-        loadProducts(1, newSearchText);
-    }
+const handleSearchinChange = ({ searchText }: { searchText: string }) => {
+    console.log('Оправленный запрос на поиск:', searchText);
+
+    loadProducts(1, searchText);
 };
+
 
 
 watch(searchText, (newVal, oldVal) => {
@@ -70,20 +69,23 @@ const handlePriceChange = ({ minPrice: newMinPrice, maxPrice: newMaxPrice }: { m
 };
 
 const filteredComputed = computed(() => {
-    return products.value.filter(product => {
-        if (minPrice.value && product.price < minPrice.value
-            || maxPrice.value && product.price > maxPrice.value) {
+    const filteredProducts = products.value.filter(product => {
+        if (minPrice.value !== null && product.price < minPrice.value) {
+            return false;
+        }
+        if (maxPrice.value !== null && product.price > maxPrice.value) {
             return false;
         }
         return true;
-    })
+    });
+    console.log('Filtered products:', filteredProducts);
+    return filteredProducts;
 });
+
 
 const loadProducts = async (page: number, searchText?: string) => {
     try {
         const response = await getProducts(page, searchText);
-        console.log('Received products:', response.product);
-        console.log('Received pagination:', response.pagination);
         products.value = response.product;
         pagination.value = response.pagination;
     } catch (error) {

@@ -53,12 +53,6 @@ const handleSearchinChange = ({ searchText }: { searchText: string }) => {
     loadProducts(1, searchText);
 };
 
-
-
-watch(searchText, (newVal, oldVal) => {
-    loadProducts(1, newVal);
-});
-
 const handlePriceChange = ({ minPrice: newMinPrice, maxPrice: newMaxPrice }: { minPrice: number | null; maxPrice: number | null }) => {
     if (newMinPrice !== null) {
         minPrice.value = newMinPrice;
@@ -99,7 +93,9 @@ const changePage = async (page: number) => {
     }
 }
 
-loadProducts(pagination.value.page);
+watch(searchText, (newVal, oldVal) => {
+    loadProducts(1, newVal);
+}, {immediate: true});
 </script>
 
 
@@ -135,5 +131,7 @@ loadProducts(pagination.value.page);
     }
 }
 
-.left-layout {}
+.left-layout {
+    height: 100vh;
+}
 </style>

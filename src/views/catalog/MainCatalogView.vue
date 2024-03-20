@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { getProducts } from '@/api/product';
+import { getProducts } from '@/api/products';
 import type { IProduct } from '@/types/product';
 import type { IPagination } from '@/types/pagination';
 import Product from '../ProductView.vue';
@@ -134,4 +134,4 @@ watch(searchText, (newVal, oldVal) => {
 .left-layout {
     height: 100vh;
 }
-</style>
+</style>@/api/products

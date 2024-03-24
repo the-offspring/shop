@@ -2,10 +2,7 @@
 <template>
 <div class="container">
   <header class="header">
-    <RouterLink to="/main/">main page</RouterLink>
-    <RouterLink to="/settings">settings page</RouterLink>
   </header>
-  <h1>Progect Page</h1>
   <RouterView />
 </div>
 </template>

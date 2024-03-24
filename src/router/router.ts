@@ -5,7 +5,7 @@ const router = createRouter ({
     routes: [
         {
             name: 'main',
-            path: '/main',
+            path: '/',
             component: ( ) => import('../views/MainView.vue'),
             children: [
                 {
@@ -17,18 +17,21 @@ const router = createRouter ({
                     name: 'catalog',
                     path: 'catalog',
                     component: ( ) => import('../views/catalog/MainCatalogView.vue'),
+                    children: [
+                        {
+                            name: 'products list',
+                            path: '/products',
+                            component: ( ) => import('../views/product_list/ProductListView.vue'),
+                        },
+                        {
+                            name: 'product',
+                            path: '/product/:id',
+                            component: ( ) => import('../views/product_list/ProductCardPage.vue'),
+                        
+                        },
+                    ]
                 },
             ]
-        },
-        {
-            name: 'settings',
-            path: '/settings',
-            component: ( ) => import('../views/SettingsView.vue'),
-        },
-        {
-            name: 'product',
-            path: '/product/:id',
-            component: ( ) => import('../views/ProductView.vue'),
         },
         {
             name: 'not-found',

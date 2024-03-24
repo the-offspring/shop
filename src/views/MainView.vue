@@ -3,7 +3,7 @@
     <h2>
         Main Pages
     </h2>
-    <RouterLink to="catalog" > Catalog </RouterLink>
+    <RouterLink to="catalog/products" > Catalog </RouterLink>
     <RouterLink to="sales" > Sale </RouterLink>
 
     <div class="container">
@@ -19,9 +19,6 @@
 </script>
 
 <style scoped>
-.main {
-/* background-color: #a1a1a1; */
-}
 .container {
     display: flex;
     justify-content: center;

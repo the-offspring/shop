@@ -8,6 +8,15 @@ $gradient-color: #ffa218;
 $accent-color: #99749d; // Цвет акцента для числа "0"
 $hover-color: #de7e85; // Цвет при наведении для ссылки "Visit the original article"
 $border-radius: 7px;
+$transition: 0.3s ease-in-out;
+
+@media (hover: hover) {
+ .button-ui_brand:hover {
+    box-shadow: inset 0 0 0 50px hsla(0,0%,100%,.1);
+ }
+
+    
+}
 
 body {
     background-color: $background;
@@ -35,13 +44,19 @@ body {
     gap: 12px;
 }
 
-.button-ui_b {
-    background-image: linear-gradient(0deg, #fc8507, #ffa218);
+
+.button-ui_passive {
+    color: #fff;
     font-weight: 700;
-    border-color: #fc8507 transparent #ffa218;
+    background-image: linear-gradient(0deg,$color, $gradient-color);
+    border-color: $color transparent $gradient-color;
+    border-style: solid;
+    border-width: 1px;
+    transition: background-image $transition;
     
     &:hover {
-        background-color: #ffa218;
+        background-image: linear-gradient(90deg, $color, $gradient-color);
+        transition: background-image $transition;
     }
 }
 
@@ -58,18 +73,20 @@ body {
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
-    transition: all 0.3s ease-in-out;
 }
 
 .button-ui_white {
     background-color: #fff;
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.16);
+    transition: background-color $transition, color $transition, box-shadow $transition;
     &:hover {
         color: #333;
         background-color: #b9b9b91b;
+        transition: background-color $transition, color $transition, box-shadow $transition;
     }
     &:active {
         box-shadow: inset 0px 0px 8px 3px rgba(0, 0, 0, 0.16);
+        transition: background-color $transition, color $transition, box-shadow $transition;
         
     }
 }

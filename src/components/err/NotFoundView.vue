@@ -5,7 +5,7 @@
         <span class="four"><span class="screen-reader-text">4</span></span>
     </section>
     <div class="link-container">
-        <RouterLink to="/products" class="more-link">
+        <RouterLink to="catalog/products" class="more-link">
             Вернуться в каталог
         </RouterLink>
     </div>

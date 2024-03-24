@@ -10,22 +10,22 @@ const router = createRouter ({
             children: [
                 {
                     name: 'sales',
-                    path: 'sales',
+                    path: '/sales',
                     component: ( ) => import('../views/catalog/MainSalesView.vue'),
                 },
                 {
                     name: 'catalog',
-                    path: 'catalog',
+                    path: '/catalog',
                     component: ( ) => import('../views/catalog/MainCatalogView.vue'),
                     children: [
                         {
                             name: 'products list',
-                            path: '/products',
+                            path: 'products',
                             component: ( ) => import('../views/product_list/ProductListView.vue'),
                         },
                         {
                             name: 'product',
-                            path: '/product/:id',
+                            path: 'product/:id',
                             component: ( ) => import('../views/product_list/ProductCardPage.vue'),
                         
                         },

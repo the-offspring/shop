@@ -1,15 +1,14 @@
 <template>
     <div class="paginator">
-      <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+      <button class="button-ui button-ui_white" @click="prevPage" :disabled="currentPage === 1">Previous</button>
       <button
          v-for="page in totalPages"
          :key="page"
          @click="goToPage(page)"
-         :class="{ 'active': currentPage === page }"
-      >
+         :class="['button-ui button-ui_white',{ 'active': currentPage === page }]">
         {{ page }}
       </button>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      <button class="button-ui button-ui_white" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
     </div>
 </template>
   
@@ -35,11 +34,14 @@
 </script>
   
 <style scoped>
+@import '/assets/global/variables.scss';
+
 .paginator {
     display: flex;
     justify-content: center;
     margin-top: 8vh;
     margin-bottom: 3vh;
+    gap: 7px;
 }
   .active {
     background-color: #007bff;

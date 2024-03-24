@@ -4,7 +4,7 @@
         Main Pages
     </h2>
     <RouterLink to="catalog/products" > Catalog </RouterLink>
-    <RouterLink to="sales" > Sale </RouterLink>
+    <RouterLink to="/sales" > Sale </RouterLink>
 
     <div class="container">
         <div class="main__view">

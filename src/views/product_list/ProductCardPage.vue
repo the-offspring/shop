@@ -31,7 +31,7 @@
           </div>
           <div class="product-buy__sub">{{ calculateValue(product.price, 'monthlyPayment') }}&nbsp;₽/ мес.</div>
         </div>
-        <button class="button-ui button-ui_brand button-ui_passive">Купить</button>
+        <button class="button-ui button-ui_passive">Купить</button>
       </div>
     </div>
     <div class="product-card-top__code">Код товара: {{ product.id }}</div>
@@ -89,14 +89,6 @@ onMounted(() => {
 @import url(/assets/global/variables.scss);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-
-.button-ui_passive {
-  color: rgb(255, 255, 255);
-  background: linear-gradient(0deg, rgb(252, 133, 7), rgb(255, 162, 24));
-  border-color: rgb(252, 133, 7) transparent rgb(255, 162, 24);
-  border-style: solid;
-  border-width: 1px;
-}
 
 .product-card-top_full {
   background-color: rgb(255, 255, 255);
@@ -212,39 +204,6 @@ onMounted(() => {
   width: 44px !important;
 }
 
-.product-buy .button-ui {
-  font: 400 16px/1.5 'Montserrat', sans-serif;
-  height: 40px;
-  line-height: 38px;
-  min-width: 138px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: opacity 0.3s ease;
-}
-
-
-.button-ui_white {
-  background: #fff;
-  border: 1px solid #d9d9d9;
-}
-
-.button-ui_white:hover {
-  color: #333;
-}
-
-.button-ui_brand {
-  background-image: linear-gradient(0deg, #fc8507, #ffa218);
-  font-weight: 700;
-  border-color: #fc8507 transparent #ffa218;
-}
-
-.button-ui_brand:hover {
-  background-image: none;
-  background-color: #ffa218;
-}
 
 .product-card-top__code {
   align-self: flex-end;

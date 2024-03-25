@@ -17,7 +17,7 @@
             <div class="deposit-calculator__input-group">
                 <label for="input-income" class="deposit-calculator__label">Сумма вклада:</label>
                 <input id="input-income" v-model.number="inputData.amount" type="text"
-                    class="deposit-calculator__input deposit-calculator__input_size-large" inputmode="numeric"
+                    class="deposit-calculator__input deposit-calculator__input_size-small" inputmode="numeric"
                     pattern="[0-9]*" @blur.stop.prevent="addSymbolToEnd($event, ' ₽')"/>
             </div>
             <hr class="deposit-calculator__divider" />
@@ -123,11 +123,9 @@ window.addEventListener('scroll', checkScroll);
 }
 
 .deposit-calculator__input-group {
-
     display: flex;
+    /* max-height: 3rem; */
     justify-content: space-between;
-
-    /* flex-direction: column; */
     margin-bottom: 15px;
 }
 
@@ -143,9 +141,9 @@ window.addEventListener('scroll', checkScroll);
     font-size: 1.1rem;
 }
 
-.deposit-calculator__input_size-large {
+/* .deposit-calculator__input_size-large {
     height: 50px;
-}
+} */
 
 .deposit-calculator__input_size-small {
     height: 35px;

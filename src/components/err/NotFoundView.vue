@@ -6,7 +6,7 @@
     </section>
     <div class="link-container">
         <RouterLink to="catalog/products" class="more-link">
-            Вернуться в каталог
+            Вернуться на главную страницу
         </RouterLink>
     </div>
 </template>
@@ -161,7 +161,7 @@ textarea {
 .more-link {
     text-transform: uppercase;
     font-size: 13px;
-    background-color: #de7e85;
+    background-color: #ffa218;
     padding: 10px 15px;
     border-radius: 0;
     color: #fff;

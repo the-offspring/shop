@@ -5,8 +5,6 @@ $text-color: #bbb;
 // Основные акценты стиля
 $color: #fc8507;
 $gradient-color: #ffa218;
-$accent-color: #99749d; // Цвет акцента для числа "0"
-$hover-color: #de7e85; // Цвет при наведении для ссылки "Visit the original article"
 $border-radius: 7px;
 $transition: 0.3s ease-in-out;
 
@@ -14,13 +12,16 @@ $transition: 0.3s ease-in-out;
  .button-ui_brand:hover {
     box-shadow: inset 0 0 0 50px hsla(0,0%,100%,.1);
  }
+}
 
-    
+*{
+    box-sizing: border-box;
 }
 
 body {
     background-color: $background;
     font: 400 13px/1.5 "Montserrat";
+    margin: 0;
 }
 
 .block-shadow {
@@ -90,4 +91,3 @@ body {
         
     }
 }
-

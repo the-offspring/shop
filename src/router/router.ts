@@ -1,4 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import main from '../MainView.vue';
+import calc from '../views/catalog/CalcView.vue';
+import catalog from '../views/catalog/MainCatalogView.vue';
+import productsList from '../views/product_list/ProductListView.vue';
+import product from '../views/product_list/ProductCardPage.vue';
+import notFound from '../components/err/NotFoundView.vue';
 
 const router = createRouter ({
     history: createWebHashHistory('/'),
@@ -6,27 +12,27 @@ const router = createRouter ({
         {
             name: 'main',
             path: '/',
-            component: ( ) => import('../views/MainView.vue'),
+            component: main,
             children: [
                 {
-                    name: 'sales',
-                    path: '/sales',
-                    component: ( ) => import('../views/catalog/MainSalesView.vue'),
+                    name: 'calc',
+                    path: '/calc',
+                    component: calc,
                 },
                 {
                     name: 'catalog',
                     path: '/catalog',
-                    component: ( ) => import('../views/catalog/MainCatalogView.vue'),
+                    component: catalog,
                     children: [
                         {
                             name: 'products list',
                             path: 'products',
-                            component: ( ) => import('../views/product_list/ProductListView.vue'),
+                            component: productsList,
                         },
                         {
                             name: 'product',
                             path: 'product/:id',
-                            component: ( ) => import('../views/product_list/ProductCardPage.vue'),
+                            component: product                            ,
                         
                         },
                     ]
@@ -36,7 +42,7 @@ const router = createRouter ({
         {
             name: 'not-found',
             path: '/:pathMatch(.*)*',
-            component: ( ) => import('../components/err/NotFoundView.vue'),
+            component: notFound,
         },
     ]
 })

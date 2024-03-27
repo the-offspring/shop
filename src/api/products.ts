@@ -8,14 +8,14 @@ interface IResponsProducts {
 
 export const getProducts = async (
   page: number = 1,
-  searchText?: string
+  searchText?: string, 
 ): Promise<IResponsProducts> => {
   try {
     const query = new URLSearchParams({
       page: String(page),
       limit: String(40),
     }).toString();
-
+    
     const fetchResponse = await fetch(
       `https://vue-study.skillbox.cc/api/products?${query}`
     );
@@ -23,7 +23,6 @@ export const getProducts = async (
     const product: IProduct[] = searchText
       ? respons.items.filter((el: IProduct) => el.title.includes(searchText))
       : respons.items;
-
     return {
       product: product,
       pagination: respons.pagination,
@@ -33,13 +32,15 @@ export const getProducts = async (
   }
 };
 export const getOneProduct = async (id: number): Promise<IProduct | null> => {
-    try {
-      const fetchResponse = await fetch(`https://vue-study.skillbox.cc/api/products/${id}`);
-      const responseData = await fetchResponse.json();
-      const product: IProduct = responseData; 
-      return product;
-    } catch (error) {
-      console.error(`Failed to fetch product: ${error.message}`);
-      return null;
-    }
-  };
+  try {
+    const fetchResponse = await fetch(
+      `https://vue-study.skillbox.cc/api/products/${id}`
+    );
+    const responseData = await fetchResponse.json();
+    const product: IProduct = responseData;
+    return product;
+  } catch (error) {
+    console.error(`Failed to fetch product: ${error.message}`);
+    return null;
+  }
+};

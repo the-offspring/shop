@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import Product from '@/components/ProductView.vue';
-import AppPagination from '@/components/AppPaginationView.vue';
+import AppPagination from '@/components/nav/AppPaginationView.vue';
 
-import { minPrice, maxPrice, pagination, filteredComputed, products, changePage } from '@/api/catalog/list';
+import { minPrice, maxPrice, pagination, filteredComputed, products, changePage } from '@/stores/catalog/list';
 
 </script>
 
@@ -35,4 +35,4 @@ import { minPrice, maxPrice, pagination, filteredComputed, products, changePage 
         display: flex;
         justify-content: center;
     }
-</style>
+</style>@/stores/catalog/list

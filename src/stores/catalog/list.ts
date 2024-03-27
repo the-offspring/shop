@@ -9,12 +9,11 @@ export const pagination = ref<IPagination>({
     pages: 0,
     total: 0,
 })
-
-
+export const state = ref<boolean>();
 export const minPrice = ref<number | null>(null);
 export const maxPrice = ref<number | null>(null);
 export const searchText = ref('');
-
+    
 export const handleSearchinChange = ({ searchText }: { searchText: string }) => {
     loadProducts(1, searchText);
 };
@@ -44,11 +43,16 @@ export const filteredComputed = computed(() => {
 
 export const loadProducts = async (page: number, searchText?: string) => {
     try {
+        state.value = true;
         const response = await getProducts(page, searchText);
         products.value = response.product;
         pagination.value = response.pagination;
     } catch (error) {
         console.error(`Error fetching products: ${error.message}`);
+    } finally {
+        setTimeout(()=>{
+            state.value = false;
+        }, 1000000)
     }
 };
 

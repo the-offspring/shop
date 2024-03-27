@@ -9,7 +9,10 @@
                 <Search @search-product="handleSearchinChange" />
             </div>
             <div class="body">
-             <RouterView />
+                
+                <loaderAnimation v-if="state" />
+                <RouterView v-else />
+
             </div>
         </div>
     </div>
@@ -17,13 +20,11 @@
 
 <script setup lang="ts">
 import { watch } from 'vue';
+import loaderAnimation from '@/components/load/LoaderAnimation2.vue';
+import Filter from '@/components/sort/FilterView.vue';
+import Search from '@/components/sort/SearchView.vue';
 
-import Filter from '@/components/FilterView.vue';
-import Search from '@/components/SearchView.vue';
-
-import { minPrice, maxPrice, searchText, loadProducts, handleSearchinChange, handlePriceChange } from '@/api/catalog/list';
-
-
+import { minPrice, maxPrice, searchText, state, loadProducts, handleSearchinChange, handlePriceChange } from '@/stores/catalog/list';
 
 watch(searchText, (newVal, oldVal) => {
     loadProducts(1, newVal);
@@ -55,4 +56,4 @@ watch(searchText, (newVal, oldVal) => {
 .left-layout {
     height: 100vh;
 }
-</style>
+</style>@/stores/catalog/list

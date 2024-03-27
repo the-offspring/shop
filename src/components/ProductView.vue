@@ -7,31 +7,41 @@
       </RouterLink>
       <div class="product-body-footer">
         <p :class="['product-text', { 'product-text-with-small-price': propsIsSmall }]">{{ product.price }} ₽</p>
-        <button type="submit" class="button-ui button-ui_white btn">Купить</button>
+        <button @click="addCart(props.product), handleClick" :class="['button-ui button-ui_white btn', {'button-ui_passive': handleClick}]">Купить</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue';
 import type { IProduct } from '@/types/product';
 import { computed } from 'vue';
-import { RouterLink } from 'vue-router';
+import { useCartStore } from '@/stores/cart/cart';
 
+var isClicked = ref<boolean>(false);
 const props = defineProps<{ product: IProduct }>();
 const dynamicProductId = props.product.id;
+const {addCart} = useCartStore();
+const handleClick = () => {
+  isClicked.value = !isClicked.value;
+  console.log('handleClick', isClicked.value);
+};
 const propsIsSmall = computed(() => {
   return props.product.price !== undefined && props.product.price <= 5000;
 });
 </script>
 
 <style scoped>
+@import '/assets/global/variables.scss';
 .product {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 24%;
   min-height: 23.75rem;
+  max-height: max-content;
+
   border-radius: .75rem;
   background-color: #cfcfcf;
 }
@@ -78,7 +88,7 @@ const propsIsSmall = computed(() => {
 }
 
 .product-body {
-  max-height: 10.625rem;
+  max-height: max-content;
   min-height: fit-content;
   display: flex;
   flex-direction: column;

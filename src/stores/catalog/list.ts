@@ -52,7 +52,7 @@ export const loadProducts = async (page: number, searchText?: string) => {
     } finally {
         setTimeout(()=>{
             state.value = false;
-        }, 1000000)
+        }, 1000)
     }
 };
 
